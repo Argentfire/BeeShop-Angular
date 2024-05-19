@@ -1,0 +1,38 @@
+#navigation {
+  ul {
+    list-style: none;
+    background-color: rgb(243, 243, 187);
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    gap: 15px;
+  }
+
+  ul li {
+    position: relative;
+  }
+
+  ul li a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    // background-color: #333;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;
+    padding-left: 25px;
+    /* Adjust width as needed */
+  }
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}

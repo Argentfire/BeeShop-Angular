@@ -1,0 +1,69 @@
+<div>
+
+</div>
+<div id="shop">
+  <div id="shop-navigation">
+    <div id="shop-navigation-filters">
+      <span>Цена:</span><br>
+      <input id="price-min" type="text" ng-model="filterMinPrice">
+      <input id="price-max" type="text" ng-model="filterMaxPrice">
+
+      <hr>
+      <div id="shop-navigation-categories">
+        <label>
+          <input type="checkbox" ng-model="honeyFilter">
+          <span>Пчелен Мед</span>
+        </label>
+        <label>
+          <input type="checkbox" ng-model="propolisFilter">
+          <span>Прополис</span>
+        </label>
+        <label>
+          <input type="checkbox" ng-model="pollenFilter">
+          <span>Пчелен Прашец</span>
+        </label>
+        <label>
+          <input type="checkbox" ng-model="royalJellyFilter">
+          <span>Пчелно Млечице</span>
+        </label>
+        <label>
+          <input type="checkbox" ng-model="mixesFilter">
+          <span>Миксове</span>
+        </label>
+        <label>
+          <input type="checkbox" ng-model="smallBeeColoniesFilter">
+          <span>Малки Пчелни Семейства</span>
+        </label>
+        <label>
+          <input type="checkbox" ng-model="candlesFilter">
+          <span>Свещи</span>
+        </label>
+        <label>
+          <input type="checkbox" ng-model="beesWax">
+          <span>Восък</span>
+        </label>
+      </div>
+
+      <hr>
+      <div id="shop-filter-buttons">
+        <input class="filter-button apply-filter" type="button" value="Филтрирай" ng-click="vm. applyFilter()"
+          style="width: 50%;">
+        <input class="filter-button clear-filter" type="button" value="Изчисти Филтри" ng-click="vm.clearFilter()"
+          style="width: 50%;">
+      </div>
+    </div>
+  </div>
+
+  <div id="shop-content">
+
+  </div>
+</div>
+
+<!-- <p>shop works!</p>
+<dialog #myDialog>
+  <p>This is a modal dialog</p>
+  <button (click)="closeDialog()">Close</button>
+</dialog> -->
+
+<button (click)="openDialog()">Open Dialog</button>
+<button (click)="debug()">Debug</button>
