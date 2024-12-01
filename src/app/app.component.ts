@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
-import { HttpClientModule } from '@angular/common/http';
+// import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
-    imports: [RouterOutlet, NavigationComponent, HttpClientModule]
+  imports: [
+    RouterOutlet,
+    NavigationComponent,
+    // BrowserModule
+  ]
 })
 
 export class AppComponent {
