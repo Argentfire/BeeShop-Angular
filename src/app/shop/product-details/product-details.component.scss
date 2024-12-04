@@ -1,0 +1,102 @@
+header {
+  padding-left: 40%;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.product-main-row {
+  display: flex;
+  flex-direction: row;
+  justify-items: space-between;
+  height: 500px;
+
+  aside {
+    width: 50%;
+    height: 500px;
+  }
+
+  .product-images {
+    .big-image {
+      // background-image:url("https://makaveevhoney.com/media/18/50.jpg");
+      // float: left;
+      background-repeat: no-repeat;
+      background-position: top center;
+      background-size: contain;
+      width: 90%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+
+      .images-selection-list {
+        align-self: flex-end;
+        display: flex;
+        flex-direction: row;
+        justify-items: space-between;
+        z-index: 9999;
+        padding-bottom: 15px;
+      }
+
+      .image-option {
+        width: 25px;
+        height: 25px;
+        border-radius: 15px;
+        background: rgb(255, 255, 255);
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 251, 115, 1) 60%,
+          rgba(255, 175, 0, 1) 100%
+        );
+        // background-color: rgba(255, 255, 255, 0.619);
+        margin-left: 5px;
+        margin-bottom: 45px;
+        transition: background-color 1250ms;
+      }
+
+      .image-option:hover {
+        cursor: pointer;
+        background: rgb(255, 255, 255);
+        background: linear-gradient(
+          300deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 251, 115, 1) 59%,
+          rgba(255, 175, 0, 1) 100%
+        );
+      }
+    }
+  }
+
+  .product-data {
+    display: flex;
+    flex-direction: column;
+    float: right;
+  }
+}
+
+#images-modal {
+  .modal-buttons {
+    margin-left: 90%;
+  }
+  #modal-big-picture {
+    // background: url("https://makaveevhoney.com/media/18/50.jpg") no-repeat top center;
+    background-size: contain;
+    width: 600px;
+    height: 860px;
+  }
+  #modal-images-list {
+    height: 55px;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-items: space-between;
+    justify-content: center;
+    margin-top: 15px;
+
+    .modal-image-option {
+      height: 50px;
+      width: 50px;
+      background-color: black;
+      margin-left: 15px;
+    }
+  }
+}

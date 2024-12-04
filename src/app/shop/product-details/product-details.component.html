@@ -1,0 +1,38 @@
+<div id="product-details-{{id}}">
+  <header>{{name}}</header>
+  <div class="product-main-row">
+    <aside class="product-images">
+      <div #activeImage id="active-image"
+            class="big-image"
+            (click)="openBigImage()">
+            <!-- [ngStyle]="{'background-image': 'url('+ images[activeImageIndex] +')'}"> -->
+            <!-- [ngStyle]="{'background-image': images ? 'url('+ images[activeImageIndex] +')' : getLoadingImg()}"> -->
+            <div id="images-list" class="images-selection-list">
+              <div class="image-option" *ngFor="let img of images; let i = index" (click)="selectImage(i, $event)"></div>
+            </div>
+      </div>
+    </aside>
+    <aside class="product-data">
+      <span>Продукт: {{name}}</span>
+      <span>Цена: {{price}}лв.</span>
+      <span>Грамаж: {{weight}} грама</span>
+      <span>Налично Количество: {{amountLeft}} бр.</span>
+    </aside>
+  </div>
+  <div class="product-secondary-row">
+    <h2>Описание на Продукта</h2>
+    <div class="product-description">{{description}}</div>
+  </div>
+
+  <button (click)="debug()">Debug</button>
+</div>
+<!-- <p>shop works!</p> -->
+<dialog id="images-modal" #myDialog (click)="clickInModal($event)">
+  <div class="modal-buttons">
+  <button (click)="closeDialog()">Затвори</button>
+  </div>
+  <div id="modal-big-picture"></div>
+  <div id="modal-images-list" class="modal-images-selection-list">
+    <div class="modal-image-option" *ngFor="let img of images"></div>
+  </div>
+</dialog>
