@@ -55,15 +55,17 @@
   </div>
 
   <div id="shop-content">
-
+    <div *ngFor="let item of honey">
+      <app-product-card
+        [amountLeft]="item.amountLeft"
+        [description]="item.description"
+        [name]="item.name"
+        [price]="item.price"
+        [weight]="item.weight"
+        [id]="item.id"
+      />
+    </div>
   </div>
 </div>
 
-<!-- <p>shop works!</p>
-<dialog #myDialog>
-  <p>This is a modal dialog</p>
-  <button (click)="closeDialog()">Close</button>
-</dialog> -->
-
 <button (click)="openDialog()">Open Dialog</button>
-<button (click)="debug()">Debug</button>
