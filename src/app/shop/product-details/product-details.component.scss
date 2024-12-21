@@ -2,6 +2,7 @@ header {
   padding-left: 40%;
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 50px;
 }
 
 .product-main-row {
@@ -26,6 +27,8 @@ header {
       height: 100%;
       display: flex;
       justify-content: center;
+      transition: opacity 0.5s ease-in-out;
+      opacity: 1;
 
       .images-selection-list {
         align-self: flex-end;
@@ -49,7 +52,7 @@ header {
         );
         // background-color: rgba(255, 255, 255, 0.619);
         margin-left: 5px;
-        margin-bottom: 45px;
+        margin-bottom: 15px;
         transition: background-color 1250ms;
       }
 
@@ -64,12 +67,86 @@ header {
         );
       }
     }
+
+    .big-image.flip {
+      opacity: 0;
+      // transform: rotateY(180deg);
+      // transform: rotateY(360deg);
+    }
+    .big-image.hold {
+      transform: rotateY(0);
+    }
   }
 
   .product-data {
     display: flex;
     flex-direction: column;
-    float: right;
+    // float: right;
+  }
+  .purchase-controls {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    justify-items: space-between;
+    height: 350px;
+    .quantity-controls {
+      margin-top: 15px;
+
+      font-size: 1em;
+      font-family: sans-serif;
+
+      input {
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 35px;
+      }
+
+      label,
+      input,
+      button {
+        height: 25px;
+        width: 25px;
+        /* the following ensures they're all using the same box-model for rendering */
+        -moz-box-sizing: content-box; /* or `border-box` */
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+      }
+
+      .quantity-control {
+      }
+
+      .quantity-control-textbox {
+        // background-color: gray;
+
+        border-radius: 5px;
+        border-width: 1px;
+      }
+
+      .quantity-control-button {
+        border-width: 0px;
+        width: attr("width") + 1px;
+        height: attr("height") + 1px;
+
+        border-radius: 5px;
+        // border-top-left-radius: 15px;
+        // border-bottom-right-radius: 15px;
+        background-color: orange;
+      }
+
+    }
+    .cart-controls {
+      margin-top: 15px;
+
+      .cart-control {
+        width: 100%;
+      }
+
+      .add-remove-controls {
+        display: flex;
+        flex-direction: row;
+        justify-items: space-between;
+      }
+    }
   }
 }
 
@@ -78,7 +155,6 @@ header {
     margin-left: 90%;
   }
   #modal-big-picture {
-    // background: url("https://makaveevhoney.com/media/18/50.jpg") no-repeat top center;
     background-size: contain;
     width: 600px;
     height: 860px;

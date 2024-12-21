@@ -2,21 +2,39 @@
   <header>{{name}}</header>
   <div class="product-main-row">
     <aside class="product-images">
-      <div #activeImage id="active-image"
-            class="big-image"
-            (click)="openBigImage()">
-            <!-- [ngStyle]="{'background-image': 'url('+ images[activeImageIndex] +')'}"> -->
-            <!-- [ngStyle]="{'background-image': images ? 'url('+ images[activeImageIndex] +')' : getLoadingImg()}"> -->
-            <div id="images-list" class="images-selection-list">
-              <div class="image-option" *ngFor="let img of images; let i = index" (click)="selectImage(i, $event)"></div>
-            </div>
+      <div #activeImage id="active-image" class="big-image" (click)="openBigImage()">
+        <div id="images-list" class="images-selection-list">
+          <div class="image-option" *ngFor="let img of images; let i = index" (click)="selectImage(i, $event)"></div>
+        </div>
       </div>
     </aside>
-    <aside class="product-data">
-      <span>Продукт: {{name}}</span>
-      <span>Цена: {{price}}лв.</span>
-      <span>Грамаж: {{weight}} грама</span>
-      <span>Налично Количество: {{amountLeft}} бр.</span>
+    <aside class="details-and-cart">
+      <div class="product-data">
+        <span>Продукт: {{name}}</span>
+        <span>Цена: {{price}}лв.</span>
+        <span>Грамаж: {{weight}} грама</span>
+        <span>Налично Количество: {{amountLeft}} бр.</span>
+      </div>
+
+      <div class="purchase-controls">
+        <div class="quantity-controls">
+          <button class="quantity-control quantity-control-button" (click)="raiseQuantity()">+</button>
+          <input type="text" class="quantity-control quantity-control-textbox" [value]="addToCartQuantity"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')" (input)="quantityChange($event)" placeholder="1"
+            required />
+          <button class="quantity-control quantity-control-button" (click)="lowerQuantity()">-</button>
+        </div>
+
+        <div class="cart-controls">
+          <div class="add-remove-controls">
+            <button class="cart-control add-to-cart" (click)="addToCart()">Добави в количка</button>
+            <button class="cart-control remove-from-cart" [hidden]="isRemoveFromCartHidden">
+              Премахни от количката
+            </button>
+          </div>
+          <button class="cart-control finalize-purchase">Добави и завършване на поръчката</button>
+        </div>
+      </div>
     </aside>
   </div>
   <div class="product-secondary-row">
@@ -24,12 +42,11 @@
     <div class="product-description">{{description}}</div>
   </div>
 
-  <button (click)="debug()">Debug</button>
 </div>
 <!-- <p>shop works!</p> -->
 <dialog id="images-modal" #myDialog (click)="clickInModal($event)">
   <div class="modal-buttons">
-  <button (click)="closeDialog()">Затвори</button>
+    <button (click)="closeDialog()">Затвори</button>
   </div>
   <div id="modal-big-picture"></div>
   <div id="modal-images-list" class="modal-images-selection-list">

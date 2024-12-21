@@ -8,6 +8,8 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ShopService } from '../shop.service';
+import { ToastrService } from 'ngx-toastr';
+import { CartControlService } from './../../cart/cart-control.service';
 
 @Component({
   selector: 'app-product-details',
@@ -26,13 +28,19 @@ export class ProductDetailsComponent {
   type!: number;
   weight!: number;
   activeImageIndex: number;
+  private isFlipping: boolean = false;
+  orderQuantity: number = 0;
+  isRemoveFromCartHidden: boolean = true;
+  addToCartQuantity: number = 1;
 
   constructor(
     private route: ActivatedRoute,
     private shopService: ShopService,
-    private renderer: Renderer2
+    private toastr: ToastrService,
+    private cartService: CartControlService
   ) {
     this.activeImageIndex = 0;
+
   }
 
   @ViewChild('myDialog', { static: true })
@@ -41,7 +49,6 @@ export class ProductDetailsComponent {
   activeImage!: ElementRef<HTMLDivElement>;
 
   openBigImage() {
-    // Check if dialogElement is defined before using it
     if (this.dialogElement) {
       const dialog: HTMLDialogElement = this.dialogElement.nativeElement;
       dialog.showModal();
@@ -99,15 +106,22 @@ export class ProductDetailsComponent {
 
   setActiveImage() {
     const imageElement: HTMLDivElement = this.activeImage.nativeElement;
+    this.isFlipping = true;
     if (imageElement) {
       const element = document.getElementById('active-image');
-      element
-        ? (element.style.backgroundImage = `url(${
+      if (element) {
+        this.isFlipping = true;
+        element?.classList.add('flip');
+        setTimeout(() => {
+          element.style.backgroundImage = `url(${
             this.images[this.activeImageIndex]
-          })`)
-        : '';
-      // imageElement.style.setProperty('background-image', this.getImageURL());
-      debugger;
+          })`;
+          if (element) {
+            element.classList.remove('flip');
+          }
+          this.isFlipping = false;
+        }, 300);
+      }
     }
   }
 
@@ -119,12 +133,53 @@ export class ProductDetailsComponent {
     return 'url(assets/loading.gif)';
   }
 
-  debug() {
-    debugger;
-    this.shopService
-      .test(this.images[this.activeImageIndex])
-      .subscribe((data) => {
-        debugger;
-      });
+  raiseQuantity() {
+    this.addToCartQuantity++;
   }
+
+  lowerQuantity() {
+    this.addToCartQuantity--;
+  }
+
+  addToCart() {
+    debugger
+    const cartItems = this.cartService.getCartItems();
+    debugger
+    const existingCartItem = cartItems.find(x => x.id === this.id);
+    if (existingCartItem) {
+      existingCartItem.quantity += this.addToCartQuantity;
+    }
+    else {
+      const cartItem = {
+        id: this.id,
+        quantity: this.addToCartQuantity
+      };
+      this.cartService.addCartItem(cartItem);
+    }
+  }
+
+  removeFromCart() {
+    const cartItems = this.cartService.getCartItems();
+    const existingCartItem = cartItems.find(x => x.id === this.id);
+    if (existingCartItem) {
+      const index = cartItems.indexOf(existingCartItem);
+      cartItems.splice(index, 1);
+    }
+  }
+
+  quantityChange($event: any) {
+    const target = $event.currentTarget;
+    const newValue = Number.parseInt(target.value);
+    if (newValue) {
+      debugger
+      this.addToCartQuantity = newValue;
+    }
+    else {
+      debugger
+      this.addToCartQuantity = 1;
+      target.value = 1;
+    }
+  }
+
+
 }
