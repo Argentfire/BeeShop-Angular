@@ -33,6 +33,8 @@ export class ProductDetailsComponent {
   isRemoveFromCartHidden: boolean = true;
   addToCartQuantity: number = 1;
 
+  private cartItems: any[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private shopService: ShopService,
@@ -40,7 +42,6 @@ export class ProductDetailsComponent {
     private cartService: CartControlService
   ) {
     this.activeImageIndex = 0;
-
   }
 
   @ViewChild('myDialog', { static: true })
@@ -76,7 +77,10 @@ export class ProductDetailsComponent {
         this.setActiveImage();
       });
     });
+
+    this.cartItems = this.cartService.getCartItems();
   }
+
   clickInModal($event: any) {
     const modalDialogPosition: DOMRect =
       $event.currentTarget.getBoundingClientRect();
@@ -142,28 +146,25 @@ export class ProductDetailsComponent {
   }
 
   addToCart() {
-    debugger
-    const cartItems = this.cartService.getCartItems();
-    debugger
-    const existingCartItem = cartItems.find(x => x.id === this.id);
+    const existingCartItem = this.cartItems.find((x) => x.id === this.id);
     if (existingCartItem) {
       existingCartItem.quantity += this.addToCartQuantity;
-    }
-    else {
+    } else {
       const cartItem = {
         id: this.id,
-        quantity: this.addToCartQuantity
+        name: this.name,
+        quantity: this.addToCartQuantity,
+        price: this.price,
       };
       this.cartService.addCartItem(cartItem);
     }
   }
 
   removeFromCart() {
-    const cartItems = this.cartService.getCartItems();
-    const existingCartItem = cartItems.find(x => x.id === this.id);
+    const existingCartItem = this.cartItems.find((x) => x.id === this.id);
     if (existingCartItem) {
-      const index = cartItems.indexOf(existingCartItem);
-      cartItems.splice(index, 1);
+      const index = this.cartItems.indexOf(existingCartItem);
+      this.cartItems.splice(index, 1);
     }
   }
 
@@ -171,15 +172,10 @@ export class ProductDetailsComponent {
     const target = $event.currentTarget;
     const newValue = Number.parseInt(target.value);
     if (newValue) {
-      debugger
       this.addToCartQuantity = newValue;
-    }
-    else {
-      debugger
+    } else {
       this.addToCartQuantity = 1;
       target.value = 1;
     }
   }
-
-
 }
