@@ -53,8 +53,10 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
     window.addEventListener('message', this.handleMessage.bind(this), false);
 
-    this.cartItems = this.cartService.getCartItems();
-    this.calculateTotalPrice();
+    this.cartService.getCartItems().subscribe(items => {
+      this.cartItems = items;
+      this.calculateTotalPrice();
+    });
   }
 
   handleMessage(event: MessageEvent): void {

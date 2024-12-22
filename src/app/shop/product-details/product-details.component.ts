@@ -78,7 +78,9 @@ export class ProductDetailsComponent {
       });
     });
 
-    this.cartItems = this.cartService.getCartItems();
+    this.cartService.getCartItems().subscribe(items => {
+      this.cartItems = items;
+    });
   }
 
   clickInModal($event: any) {
@@ -146,10 +148,22 @@ export class ProductDetailsComponent {
   }
 
   addToCart() {
-    const existingCartItem = this.cartItems.find((x) => x.id === this.id);
-    if (existingCartItem) {
-      existingCartItem.quantity += this.addToCartQuantity;
-    } else {
+    debugger;
+    if (this.cartItems) {
+      const existingCartItem = this.cartItems.find((x) => x.id === this.id);
+      if (existingCartItem) {
+        existingCartItem.quantity += this.addToCartQuantity;
+      } else {
+        const cartItem = {
+          id: this.id,
+          name: this.name,
+          quantity: this.addToCartQuantity,
+          price: this.price,
+        };
+        this.cartService.addCartItem(cartItem);
+      }
+    }
+    else {
       const cartItem = {
         id: this.id,
         name: this.name,

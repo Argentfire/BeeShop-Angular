@@ -15,8 +15,8 @@ export class CartControlService {
     }
   }
 
-  getCartItems(): any[] {
-    return (this.items.value as any)._value;
+  getCartItems(): Observable<any[]> {
+    return this.cartItems;
   }
 
   addCartItem(item: any): void {
