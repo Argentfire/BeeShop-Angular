@@ -1,3 +1,4 @@
+import { NgModule } from '@angular/core';
 import { ApplicationConfig } from '@angular/core';
 import { provideHttpClient, HttpClientModule } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
