@@ -104,21 +104,22 @@
   </aside>
 </div>
 
-
 <dialog #finalizeOrderDialog class="finalize-order-dialog">
-  <span>Данни за поръчката:</span>
-  <span>
-    Име: {{name}}<br>
-    Телефон: {{phone}}<br>
-    Имейл: {{email}}<br>
-    Град: {{city}}<br>
-    Адрес: {{address}}<br>
-    Куриер: {{courier}}<br>
-    Допълнителна информация: {{additionalInfo}}<br><br>
-    Обща Цена: {{totalPrice + courierTax}}лв.
-  </span>
-  <div class="finalize-order-dialog-buttons">
-    <button id="finalize-order-confirm" class="finalize-order-button" (click)="confirmOrder()">Потвърди</button>
-    <button id="finalize-order-cancel" class="finalize-order-button" (click)="finalizeOrderDialog.close()">Затвори</button>
+  <div class="finalize-order-dialog-content">
+    <span>Данни за поръчката:</span>
+    <span>
+      Име: {{name}}<br>
+      Телефон: {{phone}}<br>
+      Имейл: {{email}}<br>
+      Град: {{city}}<br>
+      Адрес: {{address}}<br>
+      Куриер: {{courier}}<br>
+      Допълнителна информация: {{additionalInfo}}<br><br>
+      Обща Цена: {{totalPrice + courierTax}}лв.
+    </span>
+    <div class="finalize-order-dialog-buttons">
+      <button id="finalize-order-confirm" class="finalize-order-button" (click)="confirmOrder()">Потвърди</button>
+      <button id="finalize-order-cancel" class="finalize-order-button" (click)="closeDialog()">Затвори</button>
+    </div>
   </div>
 </dialog>

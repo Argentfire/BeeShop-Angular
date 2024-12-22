@@ -113,28 +113,31 @@
   box-shadow: 5px 5px 5px gray;
   font-family: "Times New Roman";
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  .finalize-order-dialog-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
 
-  .finalize-order-dialog-buttons {
-    // float: right;
-    align-content: end;
+    .finalize-order-dialog-buttons {
+      // float: right;
+      align-content: end;
 
-    .finalize-order-button {
-      border-width: 0px;
-      border-radius: 15px;
+      .finalize-order-button {
+        border-width: 0px;
+        border-radius: 15px;
 
-      padding: 5px 10px;
-    }
+        padding: 5px 10px;
+      }
 
-    #finalize-order-confirm {
-      background-color: rgb(72, 194, 72);
-    }
+      #finalize-order-confirm {
+        background-color: rgb(72, 194, 72);
+      }
 
-    #finalize-order-cancel {
-      margin-left: 5px;
-      background-color: red;
+      #finalize-order-cancel {
+        margin-left: 5px;
+        background-color: red;
+      }
     }
   }
 }

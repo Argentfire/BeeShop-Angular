@@ -1,10 +1,5 @@
-import {
-  Component,
-  NgZone,
-  OnInit,
-  ElementRef,
-  ViewChild,
-} from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { Component, NgZone, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartControlService } from '../cart-control.service';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './shopping-cart.component.html',
-  styleUrl: './shopping-cart.component.scss',
+  styleUrl: './shopping-cart.component.scss'
 })
 export class ShoppingCartComponent implements OnInit {
   public name: string;
@@ -35,7 +30,9 @@ export class ShoppingCartComponent implements OnInit {
   @ViewChild('finalizeOrderDialog', { static: true })
   finalizeOrderDialogElement!: ElementRef<HTMLDialogElement>;
 
-  constructor(private cartService: CartControlService, private ngZone: NgZone) {
+  constructor(private cartService: CartControlService, private ngZone: NgZone,
+    private toastr: ToastrService
+  ) {
     this.name = '';
     this.phone = '';
     this.email = '';
@@ -87,15 +84,22 @@ export class ShoppingCartComponent implements OnInit {
     );
   }
 
-  finalizeOrder() {
+  finalizeOrder(): void {
     if (this.finalizeOrderDialogElement) {
       const dialog: HTMLDialogElement = this.finalizeOrderDialogElement.nativeElement;
       dialog.showModal();
     }
   }
 
-  confirmOrder() {
-    const dialog: HTMLDialogElement = this.finalizeOrderDialogElement.nativeElement;
-    dialog.close();
+  confirmOrder(): void {
+    this.closeDialog();
+    this.toastr.success('Поръчката ви е изпратена успешно!');
+  }
+
+  closeDialog(): void {
+    if (this.finalizeOrderDialogElement) {
+      const dialog: HTMLDialogElement = this.finalizeOrderDialogElement.nativeElement;
+      dialog.close();
+    }
   }
 }
