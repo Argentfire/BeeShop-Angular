@@ -2,21 +2,33 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartControlService {
   private items = new BehaviorSubject<any[]>([]);
   cartItems = this.items.asObservable();
 
-  constructor() { }
+  constructor() {
+    const storedItems = window.localStorage.getItem('items');
+    if (storedItems) {
+      this.items.next(JSON.parse(storedItems));
+    }
+  }
 
   getCartItems(): any[] {
-    return this.items.value;
-  }
-  addCartItem(item: any): void {
-    let currentItems = this.items.value;
-    const updatedItems = { ...currentItems, item };
-    this.items.next(updatedItems);
+    return (this.items.value as any)._value;
   }
 
+  addCartItem(item: any): void {
+    const currentItems = this.items.getValue();
+    const updatedItems = [...currentItems, item]; // Ensure updatedItems is an array
+    this.items.next(updatedItems);
+
+    window.localStorage.setItem('items', JSON.stringify(updatedItems)); // Save the updated items array
+  }
+
+  updateCartItems(items: any[]): void {
+    this.items.next(items);
+    window.localStorage.setItem('items', JSON.stringify(items)); // Save the updated items array
+  }
 }
