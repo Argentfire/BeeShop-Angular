@@ -1,0 +1,140 @@
+#shopping-cart-view {
+  font-family: "Times New Roman";
+  header {
+    text-align: center;
+  }
+
+  aside {
+    background-color: #f5f7d9;
+  }
+
+  #delivery-form {
+    float: left;
+    width: 69%;
+
+    .delivery-form-segment {
+      margin-top: 10%;
+      button {
+        float: left;
+        background-image: url(../../../assets/arrow.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+        height: 30px;
+        width: 30px;
+        border: none;
+        background-color: transparent;
+        margin-right: 25px;
+      }
+      button:hover {
+        cursor: pointer;
+      }
+
+      form {
+        width: 75%;
+        background-color: #c4c794;
+        padding: 20px;
+        margin: 15px auto;
+        border-radius: 15px;
+
+        .form-row {
+          display: flex;
+          justify-content: space-evenly;
+          margin-bottom: 10px;
+
+          label {
+            flex: 1;
+            text-align: center;
+          }
+
+          input {
+            flex: 1;
+            margin: 0 5px;
+            width: 75px;
+          }
+        }
+      }
+    }
+  }
+
+  .shopping-cart {
+    display: flex;
+    flex-direction: column;
+    float: right;
+    width: 30%;
+
+    .cart-items {
+      padding: 20px;
+
+      .cart-table {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: gray;
+        font-family: "Times New Roman";
+
+        .cart-table-header-row,
+        .cart-table-header-cell {
+          border-bottom: 1px solid gray;
+          padding: 8px 10px;
+        }
+
+        .cart-table-cell {
+          text-align: center;
+        }
+      }
+    }
+
+    .cart-summary {
+      padding: 20px;
+
+      p {
+        font-family: "Times New Roman";
+      }
+
+      #finalize-order {
+        float: right;
+        border-width: 0;
+        border-radius: 10px;
+        background-color: orange;
+        padding: 5px 10px;
+        font-family: "Times New Roman";
+        font-size: 12pt;
+      }
+    }
+  }
+}
+
+.finalize-order-dialog {
+  width: 500px;
+  height: 235px;
+  border-width: 0;
+  border-radius: 15px;
+  background-color: #dee2a4;
+  box-shadow: 5px 5px 5px gray;
+  font-family: "Times New Roman";
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .finalize-order-dialog-buttons {
+    // float: right;
+    align-content: end;
+
+    .finalize-order-button {
+      border-width: 0px;
+      border-radius: 15px;
+
+      padding: 5px 10px;
+    }
+
+    #finalize-order-confirm {
+      background-color: rgb(72, 194, 72);
+    }
+
+    #finalize-order-cancel {
+      margin-left: 5px;
+      background-color: red;
+    }
+  }
+}

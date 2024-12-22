@@ -1,1 +1,124 @@
-<p>shopping-cart works!</p>
+<div id="shopping-cart-view">
+  <header>
+    <h1>Количка</h1>
+  </header>
+  <aside id="delivery-form">
+    <div id="personal-details" class="delivery-form-segment">
+      <button type="button" (click)="toggleForm('isPersonalDetailsHidden')"></button>
+      <h2>Лични Данни</h2>
+      <form id="personal-details-form" [hidden]="isPersonalDetailsHidden">
+        <div class="form-row">
+          <label for="name">Име</label>
+          <label for="phone">Телефон</label>
+          <label for="email">Имейл(по избор)</label>
+        </div>
+        <div class="form-row">
+          <input type="text" id="name" name="name" placeholder="Иван Иванов" [(ngModel)]="name" required>
+          <input type="text" id="phone" name="phone" placeholder="0898123456" [(ngModel)]="phone" required>
+          <input type="email" id="email" name="email" placeholder="ivan.ivanov@gmail.com" [(ngModel)]="email" required>
+        </div>
+      </form>
+    </div>
+    <div class="delivery-form-segment">
+      <button type="button" (click)="toggleForm('isCourierDetailsHidden')"></button>
+      <h2>Адрес за Доставка</h2>
+      <form id="delivery-address-form" [hidden]="isCourierDetailsHidden">
+        <div class="form-row">
+          <label for="city">Град</label>
+          <label for="address">Адрес</label>
+        </div>
+        <div class="form-row">
+          <input type="text" id="city" name="city" [(ngModel)]="city" placeholder="София" required>
+          <input type="text" id="address" name="address" [(ngModel)]="address"
+            placeholder="бул. Александър Стамболийски 87" required>
+        </div>
+        <div class="form-row-interactive-map">
+          <button id="toggle-interactive-map" type="button" (click)="toggleForm('isInteractiveMapHidden')"></button>
+          <h3>Интерактивна Карта</h3><br>
+          <div id="interactive-map" [hidden]="isInteractiveMapHidden">
+            <label>
+              <input type="radio" id="courier-ekont" name="courier" [(ngModel)]="courier" value="Еконт" required> Еконт
+            </label>
+            <label>
+              <input type="radio" id="courier-speedy" name="courier" [(ngModel)]="courier" value="Speedy" required>
+              Speedy
+            </label>
+            <iframe title="Econt Office Locator" allow="geolocation;"
+              src="https://staging.officelocator.econt.com?shopUrl=https://example.staging.officelocator.econt.com&city=Sofia&address=ul. rezbarska 5&officeType=office&lang=bg"
+              style="width: 100%; height: 45vh; border-width: 0px;">
+            </iframe>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="delivery-form-segment">
+      <button type="button" (click)="toggleForm('isAdditionalOrderDetailsHidden')"></button>
+      <h2>Допълнителна Информация</h2>
+      <form id="additional-info-form" [hidden]="isAdditionalOrderDetailsHidden">
+        <div class="form-row">
+          <label for="additional-info">Допълнителна информация</label>
+        </div>
+        <div class="form-row">
+          <textarea id="additional-info" name="additional-info" rows="4" style="width: 100%;"
+            [(ngModel)]="additionalInfo" placeholder="Попълването на това поле не е задължително"></textarea>
+        </div>
+      </form>
+    </div>
+  </aside>
+  <aside class="shopping-cart">
+    <div class="cart-items">
+      <h2>Артикули в Количката</h2>
+      <table class="cart-table">
+        <thead class="cart-table-header">
+          <tr class="cart-table-header-row">
+            <th class="cart-table-header-cell">Артикул</th>
+            <th class="cart-table-header-cell">Брой</th>
+            <th class="cart-table-header-cell">Единична Цена</th>
+            <th class="cart-table-header-cell">Обща Цена</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cartItem of cartItems">
+            <td class="cart-table-cell">{{cartItem.name}}</td>
+            <td class="cart-table-cell">{{cartItem.quantity}}</td>
+            <td class="cart-table-cell">{{cartItem.price}}лв.</td>
+            <td class="cart-table-cell">{{cartItem.price * cartItem.quantity}}лв.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="cart-summary">
+      <hr>
+      <h2>Ценоразпис</h2>
+      <p>Цена Продукти: {{totalPrice}}лв.</p>
+      <p>Цена Куриерска Доставка: {{courierTax}}лв.</p>
+      <p>Total Price: {{totalPrice + courierTax}}лв.</p>
+      <hr>
+      <button id="finalize-order" class="" (click)="finalizeOrder()">
+        <img src="./../../../assets/tick.png" width="15px" />
+        <span>
+          Завърши Поръчката
+        </span>
+      </button>
+    </div>
+  </aside>
+</div>
+
+
+<dialog #finalizeOrderDialog class="finalize-order-dialog">
+  <span>Данни за поръчката:</span>
+  <span>
+    Име: {{name}}<br>
+    Телефон: {{phone}}<br>
+    Имейл: {{email}}<br>
+    Град: {{city}}<br>
+    Адрес: {{address}}<br>
+    Куриер: {{courier}}<br>
+    Допълнителна информация: {{additionalInfo}}<br><br>
+    Обща Цена: {{totalPrice + courierTax}}лв.
+  </span>
+  <div class="finalize-order-dialog-buttons">
+    <button id="finalize-order-confirm" class="finalize-order-button" (click)="confirmOrder()">Потвърди</button>
+    <button id="finalize-order-cancel" class="finalize-order-button" (click)="finalizeOrderDialog.close()">Затвори</button>
+  </div>
+</dialog>
