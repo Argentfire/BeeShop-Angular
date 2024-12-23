@@ -45,6 +45,10 @@ export class ShopService {
     return this.httpClient.get(`${this.baseURL}/Honey/GetImages/${prodId}`);
   }
 
+  getThumbnail<T>(prodId: string) {
+    return this.httpClient.get(`${this.baseURL}/Honey/GetThumbnail/${prodId}`);
+  }
+
   test<T>(url: string) {
     return this.httpClient.get(url);
   }
