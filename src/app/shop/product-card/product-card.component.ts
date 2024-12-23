@@ -19,18 +19,10 @@ export class ProductCardComponent {
   @Input() price!: number;
   @Input() type!: number;
   @Input() weight!: number;
-  public images: any[];
+  @Input() thumbnail!: string;
 
   constructor(private shopService: ShopService,
     private router: Router) {
-    // this.amountLeft = this.item.amountLeft;
-    // this.description = this.item.description;
-    // this.id = this.item.id;
-    // this.name = this.item.name;
-    // this.price = this.item.price;
-    // this.type = this.item.type;
-    // this.weight = this.item.weight;
-    this.images = [];
   }
 
   foo() {
