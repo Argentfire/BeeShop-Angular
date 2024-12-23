@@ -55,7 +55,7 @@
   </div>
 
   <div id="shop-content">
-    <div *ngFor="let item of honey">
+    <div *ngFor="let item of products">
       <app-product-card
         [amountLeft]="item.amountLeft"
         [description]="item.description"
@@ -63,6 +63,7 @@
         [price]="item.price"
         [weight]="item.weight"
         [id]="item.id"
+        [thumbnail]="item.thumbnail"
       />
     </div>
   </div>
