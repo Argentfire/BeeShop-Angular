@@ -1,187 +1,211 @@
-header {
-  padding-left: 40%;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 50px;
-}
+.product-details {
+  font-family: 'Times New Roman';
 
-.product-main-row {
-  display: flex;
-  flex-direction: row;
-  justify-items: space-between;
-  height: 500px;
-
-  aside {
-    width: 50%;
-    height: 500px;
+  header {
+    padding-left: 40%;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 50px;
   }
 
-  .product-images {
-    .big-image {
-      // background-image:url("https://makaveevhoney.com/media/18/50.jpg");
-      // float: left;
-      background-repeat: no-repeat;
-      background-position: top center;
-      background-size: contain;
-      width: 90%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      transition: opacity 0.5s ease-in-out;
-      opacity: 1;
-
-      .images-selection-list {
-        align-self: flex-end;
-        display: flex;
-        flex-direction: row;
-        justify-items: space-between;
-        z-index: 9999;
-        padding-bottom: 15px;
-      }
-
-      .image-option {
-        width: 25px;
-        height: 25px;
-        border-radius: 15px;
-        background: rgb(255, 255, 255);
-        background: linear-gradient(
-          120deg,
-          rgba(255, 255, 255, 1) 0%,
-          rgba(255, 251, 115, 1) 60%,
-          rgba(255, 175, 0, 1) 100%
-        );
-        // background-color: rgba(255, 255, 255, 0.619);
-        margin-left: 5px;
-        margin-bottom: 15px;
-        transition: background-color 1250ms;
-      }
-
-      .image-option:hover {
-        cursor: pointer;
-        background: rgb(255, 255, 255);
-        background: linear-gradient(
-          300deg,
-          rgba(255, 255, 255, 1) 0%,
-          rgba(255, 251, 115, 1) 59%,
-          rgba(255, 175, 0, 1) 100%
-        );
-      }
-    }
-
-    .big-image.flip {
-      opacity: 0;
-      // transform: rotateY(180deg);
-      // transform: rotateY(360deg);
-    }
-    .big-image.hold {
-      transform: rotateY(0);
-    }
-  }
-
-  .product-data {
-    display: flex;
-    flex-direction: column;
-    // float: right;
-  }
-  .purchase-controls {
-    display: flex;
-    flex-direction: column;
-    width: 250px;
-    justify-items: space-between;
-    height: 350px;
-    .quantity-controls {
-      margin-top: 15px;
-
-      font-size: 1em;
-      font-family: sans-serif;
-
-      input {
-        margin-left: 5px;
-        margin-right: 5px;
-        width: 35px;
-      }
-
-      label,
-      input,
-      button {
-        height: 25px;
-        width: 25px;
-        /* the following ensures they're all using the same box-model for rendering */
-        -moz-box-sizing: content-box; /* or `border-box` */
-        -webkit-box-sizing: content-box;
-        box-sizing: content-box;
-      }
-
-      .quantity-control:hover {
-        cursor: pointer;
-        border-width: 1px;
-        border-color: blue;
-      }
-
-      .quantity-control-textbox {
-        // background-color: gray;
-
-        border-radius: 5px;
-        border-width: 1px;
-      }
-
-      .quantity-control-button {
-        border-width: 0px;
-        width: attr("width") + 1px;
-        height: attr("height") + 1px;
-
-        border-radius: 5px;
-        // border-top-left-radius: 15px;
-        // border-bottom-right-radius: 15px;
-        background-color: orange;
-      }
-
-    }
-    .cart-controls {
-      margin-top: 15px;
-
-      .cart-control {
-        width: 100%;
-      }
-
-      .cart-control:hover {
-        cursor: pointer;
-        // border-width: 1px;
-        border-color: blue;
-      }
-
-      .add-remove-controls {
-        display: flex;
-        flex-direction: row;
-        justify-items: space-between;
-      }
-    }
-  }
-}
-
-#images-modal {
-  .modal-buttons {
-    margin-left: 90%;
-  }
-  #modal-big-picture {
-    background-size: contain;
-    width: 600px;
-    height: 860px;
-  }
-  #modal-images-list {
-    height: 55px;
-    align-self: flex-end;
+  .product-main-row {
     display: flex;
     flex-direction: row;
     justify-items: space-between;
-    justify-content: center;
-    margin-top: 15px;
+    height: 500px;
 
-    .modal-image-option {
-      height: 50px;
-      width: 50px;
-      background-color: black;
-      margin-left: 15px;
+    aside {
+      width: 50%;
+      height: 500px;
+    }
+
+    .product-images {
+      .big-image {
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: contain;
+        width: 90%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        transition: opacity 0.5s ease-in-out;
+        opacity: 1;
+
+        .images-selection-list {
+          align-self: flex-end;
+          display: flex;
+          flex-direction: row;
+          justify-items: space-between;
+          z-index: 9999;
+          padding-bottom: 15px;
+        }
+
+        .image-option {
+          width: 25px;
+          height: 25px;
+          border-radius: 15px;
+          background: rgb(255, 255, 255);
+          background: linear-gradient(
+            120deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 251, 115, 1) 60%,
+            rgba(255, 175, 0, 1) 100%
+          );
+
+          margin-left: 5px;
+          margin-bottom: 15px;
+          transition: background-color 1250ms;
+        }
+
+        .image-option:hover {
+          cursor: pointer;
+          background: rgb(255, 255, 255);
+          background: linear-gradient(
+            300deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 251, 115, 1) 59%,
+            rgba(255, 175, 0, 1) 100%
+          );
+        }
+      }
+
+      .big-image.flip {
+        opacity: 0;
+      }
+      .big-image.hold {
+        transform: rotateY(0);
+      }
+    }
+
+    .product-data {
+      display: flex;
+      flex-direction: column;
+    }
+    .purchase-controls {
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+      justify-items: space-between;
+      height: 350px;
+      .quantity-controls {
+        margin-top: 15px;
+
+        input {
+          margin-left: 5px;
+          margin-right: 5px;
+          width: 35px;
+        }
+
+        label,
+        input,
+        button {
+          height: 25px;
+          width: 25px;
+          -moz-box-sizing: content-box;
+          -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+        }
+
+        .quantity-control:hover {
+          cursor: pointer;
+          border-width: 1px;
+          border-color: blue;
+        }
+
+        .quantity-control-textbox {
+          border-radius: 5px;
+          border-width: 1px;
+          font-family: 'Times New Roman';
+        }
+
+        .quantity-control-button {
+          border-width: 0px;
+          width: attr("width") + 1px;
+          height: attr("height") + 1px;
+
+          border-radius: 5px;
+          background-color: orange;
+          // font-size: 14pt;
+          font-weight: bold;
+        }
+      }
+      .cart-controls {
+        margin-top: 15px;
+
+        .cart-control {
+          width: 100%;
+        }
+
+        .cart-control:hover {
+          cursor: pointer;
+          border-color: blue;
+        }
+
+        .add-remove-controls {
+          display: flex;
+          flex-direction: row;
+          justify-items: space-between;
+          gap: 5px;
+
+          .add-to-cart {
+            border-radius: 5px;
+            border-width: 0px;
+            background-color: rgb(72, 194, 72);
+            padding: 5px 10px;
+            font-family: 'Times New Roman';
+            font-size: 12pt;
+          }
+
+          .remove-from-cart {
+            border-radius: 5px;
+            border-width: 0px;
+            background-color: rgb(194, 72, 72);
+            padding: 5px 10px;
+            font-family: 'Times New Roman';
+            font-size: 12pt;
+          }
+        }
+
+        .finalize-purchase-form-container {
+          margin-top: 10px;
+
+          .finalize-purchase {
+            border-radius: 5px;
+            border-width: 0px;
+            background-color: rgb(72, 194, 72);
+            padding: 5px 10px;
+            font-family: 'Times New Roman';
+            font-size: 12pt;
+          }
+        }
+      }
+    }
+  }
+
+  #images-modal {
+    .modal-buttons {
+      margin-left: 90%;
+    }
+    #modal-big-picture {
+      background-size: contain;
+      width: 600px;
+      height: 860px;
+    }
+    #modal-images-list {
+      height: 55px;
+      align-self: flex-end;
+      display: flex;
+      flex-direction: row;
+      justify-items: space-between;
+      justify-content: center;
+      margin-top: 15px;
+
+      .modal-image-option {
+        height: 50px;
+        width: 50px;
+        background-color: black;
+        margin-left: 15px;
+      }
     }
   }
 }

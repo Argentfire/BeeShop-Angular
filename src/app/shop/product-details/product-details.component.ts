@@ -33,7 +33,7 @@ export class ProductDetailsComponent {
   isRemoveFromCartHidden: boolean = true;
   addToCartQuantity: number = 1;
 
-  private cartItems: any[] = [];
+  public cartItems: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -172,13 +172,21 @@ export class ProductDetailsComponent {
       };
       this.cartService.addCartItem(cartItem);
     }
+    this.toastr.success('Вие успешно добавихте продукта в количката');
   }
 
   removeFromCart() {
     const existingCartItem = this.cartItems.find((x) => x.id === this.id);
     if (existingCartItem) {
-      const index = this.cartItems.indexOf(existingCartItem);
-      this.cartItems.splice(index, 1);
+      if (this.addToCartQuantity === existingCartItem.quantity) {
+        const index = this.cartItems.indexOf(existingCartItem);
+        this.cartItems.splice(index, 1);
+        this.toastr.info('Вие успешно премахнахте продукта от количката');
+      }
+      else {
+        existingCartItem.quantity -= this.addToCartQuantity;
+        this.toastr.info('Вие успешно намалихте количеството на продукта в количката');
+      }
     }
   }
 
@@ -191,5 +199,9 @@ export class ProductDetailsComponent {
       this.addToCartQuantity = 1;
       target.value = 1;
     }
+  }
+
+  isProductInCart() {
+    return this.cartItems.find((x) => x.id === this.id) ? true : false;
   }
 }

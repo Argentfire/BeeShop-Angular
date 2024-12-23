@@ -1,4 +1,4 @@
-<div id="product-details-{{id}}">
+<div id="product-details-{{id}}" class="product-details">
   <header>{{name}}</header>
   <div class="product-main-row">
     <aside class="product-images">
@@ -28,11 +28,13 @@
         <div class="cart-controls">
           <div class="add-remove-controls">
             <button class="cart-control add-to-cart" (click)="addToCart()">Добави в количка</button>
-            <button class="cart-control remove-from-cart" [hidden]="isRemoveFromCartHidden">
+            <button class="cart-control remove-from-cart" [hidden]="!isProductInCart()" (click)="removeFromCart()">
               Премахни от количката
             </button>
           </div>
-          <button class="cart-control finalize-purchase">Добави и завършване на поръчката</button>
+          <form class="finalize-purchase-form-container" action="/cart">
+            <button class="cart-control finalize-purchase" type="submit">Добави и завършване на поръчката</button>
+          </form>
         </div>
       </div>
     </aside>
