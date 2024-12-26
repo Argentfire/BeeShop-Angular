@@ -52,7 +52,7 @@ jobs:
 
     - name: archive build
       if: success()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: deployable-artifacts
         path: dist
@@ -75,6 +75,12 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             name: deployable-artifacts
+            path: deployable-artifacts
+
+        
+
+        - name: List downloaded artifacts
+          run: ls 
 
         - name: Deploy to GitHub Pages
           uses: JamesIves/github-pages-deploy-action@releases/v3
