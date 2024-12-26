@@ -36,12 +36,10 @@ jobs:
     # Install latest npm due issue with one of the packages
     - name: Install latest npm
       run: npm i -g npm@latest
-    # Install all packages
-    - name: npm install
-      run: npm install
-    #Run the build script
-    - name: npm run-script build
-      run: npm run-script build
+    - name: Build
+      run:  |
+        npm install
+        npm run-script deploy
       # env:
       #   IS4_BAIGANIO_CLIENT_SECRET: ${{ secrets.IS4_BAIGANIO_CLIENT_SECRET }}
       #   IS4_BAIGANIO_USER_SECRET: ${{ secrets.IS4_BAIGANIO_USER_SECRET }}
