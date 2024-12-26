@@ -1,0 +1,15 @@
+<mat-toolbar color="primary">
+    <span>Милкови</span>
+    <span class="spacer"></span>
+    <button mat-button [routerLink]="['/']">Начало</button>
+    <button mat-button [routerLink]="['/shop']">Магазин</button>
+    <button mat-button [routerLink]="['/contact']">Контакт</button>
+    <button mat-button [routerLink]="['/about']">За Нас</button>
+    <span class="spacer"></span>
+    <button class="cart" mat-button>
+      <a [routerLink]="['/cart']">
+        <img src="assets/cart.svg" alt="cart"  width="50px"/>
+      </a>
+    </button>
+  </mat-toolbar>
+  

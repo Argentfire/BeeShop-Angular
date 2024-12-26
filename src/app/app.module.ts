@@ -3,24 +3,31 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
-import { ShoppingCartComponent } from './cart/shopping-cart/shopping-cart.component';
-import { RouterModule } from '@angular/router';
-import { routes } from './app.routes';
+import { AppRoutingModule } from './app-routing.module';
+import { AngularMaterialModule } from './@modules/angular-material.module';
+import { CommonModule } from '@angular/common';
+import { ShoppingCartComponent } from './@components/cart/shopping-cart/shopping-cart.component';
+import { HomeComponent } from './@components/home/home.component';
+import { NavigationComponent } from './@components/navigation/navigation.component';
+
 
 @NgModule({
-  declarations: [],
+  bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ShoppingCartComponent,
+    NavigationComponent
+  ],
   imports: [
+    AppRoutingModule,
+    AngularMaterialModule,
+    CommonModule,
     BrowserModule,
-    FormsModule, // Add FormsModule here
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    RouterModule.forRoot(routes),
-    AppComponent,
-    ShoppingCartComponent,
     FormsModule
   ],
   providers: [],
