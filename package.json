@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy": "ng build --configuration=production --base-href=https://argentfire.github.io/beeshop-angular/"

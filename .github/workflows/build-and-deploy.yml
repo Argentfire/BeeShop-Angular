@@ -78,7 +78,12 @@ jobs:
         
 
         - name: List downloaded artifacts
-          run: ls 
+          run: ls -la
+        - name: Print working directory
+          run: pwd
+
+        - name: List all files
+          run: ls -la deployable_artifacts
 
         - name: Deploy to GitHub Pages
           uses: JamesIves/github-pages-deploy-action@releases/v3
