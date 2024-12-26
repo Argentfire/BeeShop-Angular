@@ -6,8 +6,6 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shopping-cart',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.scss'
 })
