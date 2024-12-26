@@ -52,7 +52,7 @@ jobs:
 
     - name: archive build
       if: success()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: deployable-artifacts
         path: dist
