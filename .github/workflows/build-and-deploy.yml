@@ -83,7 +83,7 @@ jobs:
           run: pwd
 
         - name: List all files
-          run: ls -la deployable_artifacts
+          run: ls -la deployable-artifacts
 
         - name: Deploy to GitHub Pages
           uses: JamesIves/github-pages-deploy-action@releases/v3
