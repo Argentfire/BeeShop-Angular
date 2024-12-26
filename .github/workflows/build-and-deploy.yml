@@ -21,10 +21,10 @@ jobs:
     - name: Checkout master branch
       uses: actions/checkout@v2
     # This installs node
-    - name: Install Node.js 14.x
-      uses: actions/setup-node@v1
+    - name: Install Node.js 20.x
+      uses: actions/setup-node@v3
       with:
-        node-version: '14.x'
+        node-version: '20.x'
     # This allows for re-using node_modules caching, making builds a bit faster.
     - name: Cache node_modules
       uses: actions/cache@v1
