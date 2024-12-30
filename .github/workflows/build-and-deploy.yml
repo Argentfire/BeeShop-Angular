@@ -75,7 +75,7 @@ jobs:
             name: deployable-artifacts
             path: deployable-artifacts
 
-        
+
 
         - name: List downloaded artifacts
           run: ls -la
@@ -91,6 +91,8 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             BRANCH: gh-pages
             FOLDER: deployable-artifacts/browser
+            CLEAN: true
+            BASE_PATH: /BeeShop-Angular/
           # env:
           #   IS4_BAIGANIO_CLIENT_SECRET: ${{ secrets.IS4_BAIGANIO_CLIENT_SECRET }}
           #   IS4_BAIGANIO_USER_SECRET: ${{ secrets.IS4_BAIGANIO_USER_SECRET }}
