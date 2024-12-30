@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ShopService } from '../shop.service';
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { CartControlService } from './../../cart/cart-control.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class ProductDetailsComponent {
   constructor(
     private route: ActivatedRoute,
     private shopService: ShopService,
-    private toastr: ToastrService,
+    // private toastr: ToastrService,
     private cartService: CartControlService
   ) {
     this.activeImageIndex = 0;
@@ -172,7 +172,7 @@ export class ProductDetailsComponent {
       };
       this.cartService.addCartItem(cartItem);
     }
-    this.toastr.success('Вие успешно добавихте продукта в количката');
+    // this.toastr.success('Вие успешно добавихте продукта в количката');
   }
 
   removeFromCart() {
@@ -181,11 +181,11 @@ export class ProductDetailsComponent {
       if (this.addToCartQuantity === existingCartItem.quantity) {
         const index = this.cartItems.indexOf(existingCartItem);
         this.cartItems.splice(index, 1);
-        this.toastr.info('Вие успешно премахнахте продукта от количката');
+        // this.toastr.info('Вие успешно премахнахте продукта от количката');
       }
       else {
         existingCartItem.quantity -= this.addToCartQuantity;
-        this.toastr.info('Вие успешно намалихте количеството на продукта в количката');
+        // this.toastr.info('Вие успешно намалихте количеството на продукта в количката');
       }
     }
   }

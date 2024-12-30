@@ -10,62 +10,35 @@
 
       <hr>
       <div id="shop-navigation-categories">
-        <label>
-          <input type="checkbox" ng-model="honeyFilter">
-          <span>Пчелен Мед</span>
-        </label>
-        <label>
-          <input type="checkbox" ng-model="propolisFilter">
-          <span>Прополис</span>
-        </label>
-        <label>
-          <input type="checkbox" ng-model="pollenFilter">
-          <span>Пчелен Прашец</span>
-        </label>
-        <label>
-          <input type="checkbox" ng-model="royalJellyFilter">
-          <span>Пчелно Млечице</span>
-        </label>
-        <label>
-          <input type="checkbox" ng-model="mixesFilter">
-          <span>Миксове</span>
-        </label>
-        <label>
-          <input type="checkbox" ng-model="smallBeeColoniesFilter">
-          <span>Малки Пчелни Семейства</span>
-        </label>
-        <label>
-          <input type="checkbox" ng-model="candlesFilter">
-          <span>Свещи</span>
-        </label>
-        <label>
-          <input type="checkbox" ng-model="beesWax">
-          <span>Восък</span>
+        <label *ngFor="let category of products">
+          <input type="checkbox" value="filter.value" [attr.filterType]="category.type" (change)="onFilterChange(category.type, $event)">
+          <span>{{category.typeText}}</span>
         </label>
       </div>
 
       <hr>
       <div id="shop-filter-buttons">
-        <input class="filter-button apply-filter" type="button" value="Филтрирай" ng-click="vm. applyFilter()"
+        <input id="apply-filter-button" class="filter-button apply-filter" type="button" value="Филтрирай" (click)="applyFilters()"
           style="width: 50%;">
-        <input class="filter-button clear-filter" type="button" value="Изчисти Филтри" ng-click="vm.clearFilter()"
+        <input id="clear-filter-button" class="filter-button clear-filter" type="button" value="Изчисти Филтри" ng-click="vm.clearFilter()"
           style="width: 50%;">
       </div>
     </div>
   </div>
 
   <div id="shop-content">
-    <div *ngFor="let item of products">
-      <app-product-card
+      <app-product-card *ngFor="let item of products"
+        id="{{item.id}}"
+        class="product-card"
         [amountLeft]="item.amountLeft"
         [description]="item.description"
         [name]="item.name"
         [price]="item.price"
         [weight]="item.weight"
         [id]="item.id"
+        [type]="item.type"
         [thumbnail]="item.thumbnail"
       />
-    </div>
   </div>
 </div>
 

@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ShopService } from './shop.service';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { CommonModule } from '@angular/common';
-import { Product } from './../models/product';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-shop',
@@ -21,73 +21,31 @@ export class ShopComponent {
   products: Product[];
   @ViewChild('myDialog', { static: true })
   dialogElement!: ElementRef<HTMLDialogElement>;
+  filters: number[];
+  allProductCards: NodeListOf<HTMLDivElement>;
+
   constructor(private shopService: ShopService) {
     this.products = [];
+    this.filters = [];
+    this.allProductCards = document.querySelectorAll('.product-card');
   }
 
   ngOnInit() {
     this.shopService.getProducts().subscribe(
       (data: any) => {
-        this.honey = data.honey;
-        this.polen = data.polen;
-        this.propolis = data.propolis;
-        this.royalJelly = data.royalJelly;
-
-        for (let honey of data.honey) {
-          const prod = new Product(
-            honey.id,
-            honey.name,
-            honey.description,
-            honey.price,
-            honey.amountLeft,
-            honey.weight,
-            honey.type,
-            honey.images
+        for (let item of data) {
+          const product = new Product(
+            item.id,
+            item.name,
+            item.description,
+            item.price,
+            item.amountLeft,
+            item.weight,
+            item.type,
+            item.images
           );
-          this.products.push(prod);
-          this.getProductThumbnails(prod);
-        }
-        for (let polen of data.polen) {
-          this.products.push(
-            new Product(
-              polen.id,
-              polen.name,
-              polen.description,
-              polen.price,
-              polen.amountLeft,
-              polen.weight,
-              polen.type,
-              polen.images
-            )
-          );
-        }
-        for (let propolis of data.propolis) {
-          this.products.push(
-            new Product(
-              propolis.id,
-              propolis.name,
-              propolis.description,
-              propolis.price,
-              propolis.amountLeft,
-              propolis.weight,
-              propolis.type,
-              propolis.images
-            )
-          );
-        }
-        for (let royalJelly of data.royalJelly) {
-          this.products.push(
-            new Product(
-              royalJelly.id,
-              royalJelly.name,
-              royalJelly.description,
-              royalJelly.price,
-              royalJelly.amountLeft,
-              royalJelly.weight,
-              royalJelly.type,
-              royalJelly.images
-            )
-          );
+          this.products.push(product);
+          this.getProductThumbnails(product);
         }
       },
       (error) => {}
@@ -104,8 +62,43 @@ export class ShopComponent {
     });
   }
 
+  selectedFilters: any = {};
+
+  onFilterChange(filterType: number, event: any) {
+    if (event.target.checked) {
+      this.filters.push(filterType);
+    } else {
+      const index = this.filters.indexOf(filterType);
+      if (index > -1) {
+        this.filters.splice(index, 1);
+      }
+    }
+  }
+
+  applyFilters() {
+    const allProductCards = document.querySelectorAll('.product-card');
+
+    if (this.filters.length === 0) {
+      allProductCards.forEach((card) => {
+        (card as any).hidden = false;
+      });
+    } else {
+      allProductCards.forEach((card) => {
+        card.setAttribute('display', 'flex');
+        const cardType = card.getAttribute('ng-reflect-type');
+        const cardTypeInt = cardType ? Number.parseInt(cardType) : -1;
+        if (cardTypeInt > -1) {
+          if (!this.filters.includes(cardTypeInt)) {
+            (card as any).hidden = true;
+          } else {
+            (card as any).hidden = false;
+          }
+        }
+      });
+    }
+  }
+
   openDialog() {
-    // Check if dialogElement is defined before using it
     if (this.dialogElement) {
       const dialog: HTMLDialogElement = this.dialogElement.nativeElement;
       dialog.showModal();

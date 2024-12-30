@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 })
 export class ShopService {
 
-  private baseURL: string = "https://localhost:7076";
+  private baseURL: string = "https://localhost:5001";
   constructor(
     private httpClient: HttpClient) {
   }
 
-  getHoney<T>() {
-    return this.httpClient.get(`${this.baseURL}/Honey`);
+  getHoney<T>(id: string) {
+    return this.httpClient.get(`${this.baseURL}/GetProduct/${id}`);
   }
 
   getProducts<T>() {
