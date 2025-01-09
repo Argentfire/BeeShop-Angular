@@ -1,13 +1,22 @@
-import { ToastrService } from 'ngx-toastr';
-import { Component, NgZone, OnInit, ElementRef, ViewChild } from '@angular/core';
+// import { ToastrService } from 'ngx-toastr';
+import {
+  Component,
+  NgZone,
+  OnInit,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartControlService } from '../cart-control.service';
 import { FormsModule } from '@angular/forms';
+import { PurchaseOrder } from '../../../models/purchase-order';
+import { ShopService } from '../../shop/shop.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrl: './shopping-cart.component.scss'
+  styleUrl: './shopping-cart.component.scss',
 })
 export class ShoppingCartComponent implements OnInit {
   public name: string;
@@ -24,13 +33,18 @@ export class ShoppingCartComponent implements OnInit {
   public cartItems: any[];
   public totalPrice: number;
   public courierTax: number;
+  public purchaseOrder: PurchaseOrder;
 
   @ViewChild('finalizeOrderDialog', { static: true })
   finalizeOrderDialogElement!: ElementRef<HTMLDialogElement>;
 
-  constructor(private cartService: CartControlService, private ngZone: NgZone,
+  constructor(
+    private cartService: CartControlService,
+    private ngZone: NgZone,
+    private shopService: ShopService,
     private toastr: ToastrService
-  ) {
+  )
+  {
     this.name = '';
     this.phone = '';
     this.email = '';
@@ -38,6 +52,7 @@ export class ShoppingCartComponent implements OnInit {
     this.address = '';
     this.courier = '';
     this.additionalInfo = '';
+    this.purchaseOrder = new PurchaseOrder();
     this.isPersonalDetailsHidden = false;
     this.isCourierDetailsHidden = false;
     this.isInteractiveMapHidden = true;
@@ -51,7 +66,7 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
     window.addEventListener('message', this.handleMessage.bind(this), false);
 
-    this.cartService.getCartItems().subscribe(items => {
+    this.cartService.getCartItems().subscribe((items) => {
       this.cartItems = items;
       this.calculateTotalPrice();
     });
@@ -86,19 +101,25 @@ export class ShoppingCartComponent implements OnInit {
 
   finalizeOrder(): void {
     if (this.finalizeOrderDialogElement) {
-      const dialog: HTMLDialogElement = this.finalizeOrderDialogElement.nativeElement;
+      const dialog: HTMLDialogElement =
+        this.finalizeOrderDialogElement.nativeElement;
       dialog.showModal();
     }
   }
 
   confirmOrder(): void {
     this.closeDialog();
-    this.toastr.success('Поръчката ви е изпратена успешно!');
+    this.shopService.createPurchaseOrder(this.purchaseOrder).subscribe(
+      (data) => {
+        this.toastr.success('Поръчката ви е изпратена успешно!');
+      }
+    );
   }
 
   closeDialog(): void {
     if (this.finalizeOrderDialogElement) {
-      const dialog: HTMLDialogElement = this.finalizeOrderDialogElement.nativeElement;
+      const dialog: HTMLDialogElement =
+        this.finalizeOrderDialogElement.nativeElement;
       dialog.close();
     }
   }
