@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { PurchaseOrder } from '../../models/purchase-order';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShopService {
 
-  private baseURL: string = "https://localhost:5001";
+  private baseURL: string = "https://46.55.204.92:5001";
   constructor(
     private httpClient: HttpClient) {
   }
@@ -51,5 +52,9 @@ export class ShopService {
 
   test<T>(url: string) {
     return this.httpClient.get(url);
+  }
+
+  createPurchaseOrder<T>(purchaseOrder: PurchaseOrder) {
+    return this.httpClient.post<PurchaseOrder>(`${this.baseURL}/AddPurchaseOrder`, purchaseOrder);
   }
 }
