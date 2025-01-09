@@ -47,8 +47,7 @@ export class ShopComponent {
           this.products.push(product);
           this.getProductThumbnails(product);
         }
-      },
-      (error) => {}
+      }
     );
   }
 
